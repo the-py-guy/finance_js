@@ -19,7 +19,9 @@ class financeDb {
 
 class wsAPI {
 	constructor() {
-		const wss = new WebSocket.Server({ port: 8080 });
+		var wsPort = 8080;
+		const wss = new WebSocket.Server({ port: wsPort });
+		console.log('WebSocket running on port '+wsPort);
 
 
 		wss.on('connection', ws => {
@@ -90,7 +92,7 @@ class wsAPI {
 }
 
 
-
+console.clear();
 
 
 
