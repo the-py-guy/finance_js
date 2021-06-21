@@ -49,7 +49,8 @@ class wsAPI {
 							db.db.all('SELECT * FROM trades', [], (err, rows) => {
 								if (err) {
 									ws.send(JSON.stringify({'success':false,'error':err}));
-								} else {
+								}
+								else {
 									ws.send(JSON.stringify(rows));
 								}
 							});
@@ -57,9 +58,21 @@ class wsAPI {
 						else if (key == 'update_trade') {
 							db.db.run('UPDATE trades SET ticker=?,shares=?,bought_for=?,sold_for=?,position_opened=?,position_closed=? WHERE id=?', [data['ticker'],data['shares'],data['bought_for'],data['sold_for'],data['position_opened'],data['position_closed'],data['id']], function(err) {
 								if (err) {
-									console.log(err);
+									ws.send(JSON.stringify({'success':false,'error':err}));
 								}
-								console.log('Row(s) updated: ${this.changes}');
+								else {
+									ws.send(JSON.stringify({'success':true}));
+								}
+							});
+						}
+						else if (key == 'delete_trade') {
+							db.db.run('DELETE FROM trades WHERE id=?', [data['id']], function(err) {
+								if (err) {
+									ws.send(JSON.stringify({'success':false,'error':err}));
+								}
+								else {
+									ws.send(JSON.stringify({'success':true}));
+								}
 							});
 						}
 						else {
@@ -68,7 +81,7 @@ class wsAPI {
 					}
 				}
 				catch (err) {
-					console.log(err);
+					//console.log(err);
 					ws.send(JSON.stringify(defaultErrorResponse));
 				}
 			});

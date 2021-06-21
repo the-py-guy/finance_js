@@ -51,3 +51,11 @@ This repository is aimed at providing a convenient one stop shop for finance rel
 	}
 }
 ```
+
+#### Delete Trade
+> This request is used to delete a trade.
+```javascript
+{
+	"delete_trade":{"id":"sktwim0rkq60fiq2"}
+}
+```
