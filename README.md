@@ -38,6 +38,15 @@ This repository is aimed at providing a convenient one stop shop for finance rel
 
 #### Update Trade
 > This request is used to update a trade. The "id" of the trade cannot be changed, it is only passed in as a reference to the trade you would like to change.
+
+* Data Types
+  * ticker: string
+  * shares: double
+  * boughtFor: double
+  * soldFor: double
+  * positionOpened: double/int (unix timestamp)
+  * positionClosed: double/int (unix timestamp)
+
 ```javascript
 {
 	"update_trade": {
