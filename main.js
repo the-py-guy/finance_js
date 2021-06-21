@@ -1,6 +1,8 @@
 const sqlite3 = require('sqlite3').verbose();
 var uniqid = require('uniqid');
 const WebSocket = require('ws');
+var http = require('http');
+var fs = require('fs');
 
 class financeDb {
 	constructor() {
@@ -19,7 +21,7 @@ class financeDb {
 
 class wsAPI {
 	constructor() {
-		var wsPort = 8080;
+		var wsPort = 8081;
 		const wss = new WebSocket.Server({ port: wsPort });
 		console.log('WebSocket running on port '+wsPort);
 
@@ -91,6 +93,21 @@ class wsAPI {
 	}
 }
 
+class webServer {
+	constructor() {
+		var httpPort = 8080;
+		console.log('http server running on port '+httpPort);
+		http.createServer(function (req, res) {
+		  fs.readFile('html/index.html', function(err, data) {
+		    res.writeHead(200, {'Content-Type': 'text/html'});
+		    res.write(data);
+		    return res.end();
+		  });
+		}).listen(httpPort);
+	}
+}
+
+
 
 console.clear();
 
@@ -98,7 +115,7 @@ console.clear();
 
 var db = new financeDb();
 var ws = new wsAPI();
-
+var httpserver = new webServer();
 
 
 
