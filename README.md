@@ -7,13 +7,13 @@ This repository is aimed at providing a convenient one stop shop for finance rel
 #### Add Trade
 > This request is used to book an active or previously closed trade. Any trade that has a null value for "soldFor" and "positionClosed" will be considered as an active trade, once the before mentioned values are filled in, the trade will be considered inactive or closed.
 
-##### Data Types
-* ticker: string
-* shares: double
-* boughtFor: double
-* soldFor: double
-* positionOpened: double/int (unix timestamp)
-* positionClosed: double/int (unix timestamp)
+* Data Types
+  * ticker: string
+  * shares: double
+  * boughtFor: double
+  * soldFor: double
+  * positionOpened: double/int (unix timestamp)
+  * positionClosed: double/int (unix timestamp)
 
 ```javascript
 {
