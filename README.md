@@ -17,13 +17,13 @@ This repository is aimed at providing a convenient one stop shop for finance rel
 
 ```javascript
 {
-	"addTrade": {
+	"add_trade": {
 		"ticker":"tsla", //not null
 		"shares":100.0, //not null
-		"boughtFor":565.12, //not null
-		"soldFor":752.79,
-		"positionOpened":12342345.23423423, //not null
-		"positionClosed":45604575.34566455
+		"bought_for":565.12, //not null
+		"sold_for":752.79,
+		"position_opened":12342345.23423423, //not null
+		"position_closed":45604575.34566455
 	}
 }
 ```
@@ -32,6 +32,22 @@ This repository is aimed at providing a convenient one stop shop for finance rel
 > This request is used to get all active and closed trades.
 ```javascript
 {
-	"getTrades":""
+	"get_trades":""
+}
+```
+
+#### Update Trade
+> This request is used to update a trade. The "id" of the trade cannot be changed, it is only passed in as a reference to the trade you would like to change.
+```javascript
+{
+	"update_trade": {
+		"id": "sktwim0rkq60fiq2",
+		"ticker": "tsla",
+		"shares": 200.0,
+		"bought_for": 951.32,
+		"sold_for": 976.20,
+		"position_opened": 12346534.23423423,
+		"position_closed": 45608321.34566455
+	}
 }
 ```

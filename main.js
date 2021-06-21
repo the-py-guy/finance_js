@@ -34,9 +34,9 @@ class wsAPI {
 					var key;
 					for (key in request) {
 						var data = request[key];
-						if (key == 'addTrade') {
+						if (key == 'add_trade') {
 							
-							db.db.run('INSERT INTO trades(id,ticker,shares,bought_for,sold_for,position_opened,position_closed) VALUES (?,?,?,?,?,?,?)',[uniqid(),data['ticker'],data['shares'],data['boughtFor'],data['soldFor'],data['positionOpened'],data['positionClosed']], function(err) {
+							db.db.run('INSERT INTO trades(id,ticker,shares,bought_for,sold_for,position_opened,position_closed) VALUES (?,?,?,?,?,?,?)',[uniqid(),data['ticker'],data['shares'],data['bought_for'],data['sold_for'],data['position_opened'],data['position_closed']], function(err) {
 								if (err) {
 									ws.send(JSON.stringify({'success':false,'error':err}));
 								}
@@ -45,13 +45,21 @@ class wsAPI {
 								}
 							});
 						}
-						else if (key == 'getTrades') {
+						else if (key == 'get_trades') {
 							db.db.all('SELECT * FROM trades', [], (err, rows) => {
 								if (err) {
 									ws.send(JSON.stringify({'success':false,'error':err}));
 								} else {
 									ws.send(JSON.stringify(rows));
 								}
+							});
+						}
+						else if (key == 'update_trade') {
+							db.db.run('UPDATE trades SET ticker=?,shares=?,bought_for=?,sold_for=?,position_opened=?,position_closed=? WHERE id=?', [data['ticker'],data['shares'],data['bought_for'],data['sold_for'],data['position_opened'],data['position_closed'],data['id']], function(err) {
+								if (err) {
+									console.log(err);
+								}
+								console.log('Row(s) updated: ${this.changes}');
 							});
 						}
 						else {
